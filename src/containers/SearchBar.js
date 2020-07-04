@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { fetchWeather } from "../actions";
 import { useDispatch } from "react-redux";
+
+import { fetchWeather } from "../actions";
+import { error } from "../actions";
 
 const SearchBar = ({ label }) => {
   const [term, setTerm] = useState("");
-
   const dispatch = useDispatch();
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+    dispatch(error());
     dispatch(fetchWeather(term));
+    setTerm("");
   };
 
   return (

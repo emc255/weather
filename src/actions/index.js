@@ -1,4 +1,4 @@
-import { FETCH_WEATHER } from "./types";
+import { FETCH_WEATHER, FETCH_WEATHER_ERROR } from "./types";
 import openWeather from "../apis/openWeather";
 
 export const fetchWeather = (city) => async (dispatch) => {
@@ -12,7 +12,13 @@ export const fetchWeather = (city) => async (dispatch) => {
     });
     dispatch({ type: FETCH_WEATHER, payload: response.data });
   } catch (err) {
-    console.log(err.Error);
-    dispatch({ type: FETCH_WEATHER, payload: err });
+    dispatch({ type: FETCH_WEATHER_ERROR, payload: "We're sorry we can't find the city" });
   }
+};
+
+export const error = () => {
+  return {
+    type: FETCH_WEATHER_ERROR,
+    payload: "",
+  };
 };
